@@ -2,10 +2,7 @@ import mongoose from 'mongoose';
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb://localhost:27017/myapp', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect('mongodb://localhost:27017/myapp'); // No need for options
         console.log('MongoDB connected successfully!');
     } catch (err) {
         console.error('Error connecting to MongoDB:', err);
@@ -17,4 +14,3 @@ const connectDB = async () => {
 connectDB();
 
 export default mongoose;
-

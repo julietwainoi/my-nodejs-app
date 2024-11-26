@@ -12,6 +12,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(path.resolve(), 'public'))); // Serve static files
 
+// Root route
+app.get('/', (req, res) => {
+    res.send('<h1>Welcome to the Server!</h1>');
+});
+
 // Routes
 app.use('/api/upload', uploadRoutes);
 app.use('/api/auth', authRoutes);
