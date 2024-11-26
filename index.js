@@ -1,16 +1,30 @@
-const express = require('express');
+import express from 'express';
+import formidable from 'formidable';
+
 const app = express();
 
-// Middleware to parse JSON
-app.use(express.json());
-
-// Define a route
 app.get('/', (req, res) => {
-    res.send('Welcome to my Node.js app!');
+    res.send(`
+      <h2>With <code>"express"</code> npm package</h2>
+      <form action="/api/upload" enctype="multipart/form-data" method="post">
+      <div>Text field title: <input type="text" name="title" /></div>
+      <div>File: <input type="file" name="someExpressFiles" multiple="multiple" /></div>
+      <input type="submit" value="Upload" />
+      </form>
+   `);
+});
+app.post('/api/upload', (req, res, next) => {
+    const form = formidable({});
+
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        res.json({ fields, files });
+    });
 });
 
-// Start the server
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(5000, () => {
+    console.log('Server listening on http://localhost:5000 ...');
 });
