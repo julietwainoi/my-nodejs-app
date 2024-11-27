@@ -1,9 +1,12 @@
 import express from 'express';
 const router = express.Router();
 
-// Define a route for authentication (e.g., login)
 router.post('/login', (req, res) => {
-    res.send('Login route');
+    res.json({ message: 'Login successful' });
+});
+
+router.post('/register', (req, res) => {
+    res.json({ message: 'User registered' });
 });
 
 export default router;

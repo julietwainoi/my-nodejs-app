@@ -12,6 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(path.resolve(), 'public'))); // Serve static files
 
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static('uploads')); // Serve files from the uploads folder
+
+app.use(express.static(path.join(path.resolve(), 'public'))); // Serve other static files
 // Root route
 app.get('/', (req, res) => {
     res.send('<h1>Welcome to the Server!</h1>');
